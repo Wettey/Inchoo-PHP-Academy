@@ -10,6 +10,6 @@ class User extends AbstractModel
 
     public function getPassword(): string
     {
-        return $this->__get('pass');
+        return $this->__get('password');
     }
 }

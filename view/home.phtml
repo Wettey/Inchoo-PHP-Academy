@@ -1,17 +1,31 @@
-<?php include 'layout/header.phtml' ?>
+<?php include 'template/headerNavbar.phtml' ?>
 
-<?php foreach ($posts as $post): ?>
+<!-- Theme search bar, jquery implemented -->
+<div class="d-flex justify-content-center">
+    <form class="form-inline my-lg-2">
+        <input class="form-control mr-sm-2" type="search" placeholder="type something..." aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
+
+<!-- Themes pulled from our database -->
+<div class="container">
     <div class="row">
-        <div class="col">
-            <div class="card" style="width: 18rem;">
+        <?php foreach ( $themes as $theme) : ?>
+            <div class="col-sm-6">
                 <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted"><?= $post->getDate() ?></h6>
-                    <p class="card-text"><?= htmlspecialchars($post->getContent()) ?></p>
-                    <a href="#" class="card-link">View details</a>
+                    <div class="card-body  bg-light" style = "width: 22rem; " >
+                        <h5 class="card-title text-center"><b><?= $theme->getName() ?></b></h5>
+                        <img class="card-img-top"  src="<?= $theme->getImage_path() ?>" alt="missing image">
+                        <p class="card-text"><b><?= $theme->getCategory() ?></b></p>
+                        <p class="card-text"><?= $theme->getDescription() ?></p>
+                        <a href="#" class="btn btn-secondary">Explore</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php endforeach; ?>
     </div>
-<?php endforeach; ?>
+</div>
 
-<?php include 'layout/footer.phtml' ?>
+<?php include 'template/footer.phtml' ?>
+

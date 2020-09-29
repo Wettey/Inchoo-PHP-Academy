@@ -4,10 +4,7 @@ namespace App\Controller;
 
 use App\Core\Config;
 use App\Core\View;
-use App\Core\Session;
 use App\Model\User;
-use App\Model\User\UserRepository;
-use App\Model\User\UserResource;
 
 class UserController extends AbstractController
 {

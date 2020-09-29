@@ -9,7 +9,6 @@ use App\Core\DataObject;
 
 abstract class AbstractModel extends DataObject
 {
-    // override in child class
     protected static $tableName;
 
     protected static function getTableName(): string

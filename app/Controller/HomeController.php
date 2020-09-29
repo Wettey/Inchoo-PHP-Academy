@@ -4,24 +4,22 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Core\View;
-use App\Model\Post;
-use App\Model\Post\PostRepository;
+use App\Model\Theme;
 
 class HomeController extends AbstractController
 {
-    private $postRepository;
+    private $theme;
 
     public function __construct()
     {
-        $this->postRepository = new PostRepository();
+        $this->theme = new Theme();
         parent::__construct();
     }
 
     public function indexAction(): string
     {
         return $this->view->render('home', [
-            'posts' => Post::getAll(),
+            'themes' => Theme::getAll(),
         ]);
     }
 }

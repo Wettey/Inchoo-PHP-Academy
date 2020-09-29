@@ -1,8 +1,8 @@
 <?php
 
-<<<<<<< HEAD
-echo phpinfo();
-=======
+use App\Core\Route\Router;
+use App\Core\Application;
+
 define('BP', dirname(__DIR__));
 
 spl_autoload_register(function ($class) {
@@ -16,12 +16,11 @@ spl_autoload_register(function ($class) {
 
 session_start();
 
-$router = new \App\Core\Router();
-$application = new \App\Core\Application($router);
+$router = new Router();
+$application = new Application($router);
 
 $response = $application->run();
 
 if ($response) {
     echo $response;
 }
->>>>>>> Initial commit

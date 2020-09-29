@@ -2,13 +2,13 @@
 
 namespace App\Core;
 
+use App\Core\Route\RouterInterface;
+
 class Application
 {
     protected $router;
 
-    public function __construct(
-        RouterInterface $router
-    ) {
+    public function __construct(RouterInterface $router) {
         $this->router = $router;
     }
 
