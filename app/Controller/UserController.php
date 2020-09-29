@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Core\Config;
-use App\Core\View;
 use App\Model\User;
 
 class UserController extends AbstractController
