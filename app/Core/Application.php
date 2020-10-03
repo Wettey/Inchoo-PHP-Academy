@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-use App\Core\Route\RouterInterface;
+use App\Core\Routing\RouterInterface;
 
 class Application
 {

@@ -11,17 +11,28 @@
 <!-- Themes pulled from our database -->
 <div class="container">
     <div class="row">
-        <?php foreach ( $themes as $theme) : ?>
+        <?php foreach ($themes as $theme) : ?>
             <div class="col-sm-6">
+                <a href="/story/index">
                 <div class="card-body">
                     <div class="card-body  bg-light" style = "width: 22rem; " >
                         <h5 class="card-title text-center"><b><?= $theme->getName() ?></b></h5>
                         <img class="card-img-top"  src="<?= $theme->getImage_path() ?>" alt="missing image">
                         <p class="card-text"><b><?= $theme->getCategory() ?></b></p>
                         <p class="card-text"><?= $theme->getDescription() ?></p>
-                        <a href="#" class="btn btn-secondary">Explore</a>
+
+                        <!--
+                        if the user is logged in he can edit or delete themes
+                        otherwise, he can only see (read) the content
+                        -->
+                        <?php if (isset($currentUser)): ?>
+                        <a href="/" class="btn btn-danger float-left">Delete</a>
+                        <a href="/" class="btn btn-warning float-right">Edit</a>
+                        <?php endif ?>
+
                     </div>
                 </div>
+                </a>
             </div>
         <?php endforeach; ?>
     </div>

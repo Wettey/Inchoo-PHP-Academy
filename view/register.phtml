@@ -1,14 +1,11 @@
 <?php include 'template/headerNavbar.phtml' ?>
 
 <div class="container">
+    <h3 class="text-center">Register</h3>
     <form method="post" action="/user/registerSubmit">
         <div class="form-group">
-            <label for="first_name">First Name</label>
-            <input type="text" class="form-control" id="first_name" name="first_name">
-        </div>
-        <div class="form-group">
-            <label for="last_name">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name="last_name">
+            <label for="user_name">Username</label>
+            <input type="text" class="form-control" id="user_name" name="user_name">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
@@ -25,4 +22,5 @@
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>
+
 <?php include 'template/footer.phtml' ?>

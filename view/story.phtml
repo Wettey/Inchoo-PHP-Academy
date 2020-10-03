@@ -1,0 +1,32 @@
+
+
+<?php include 'template/headerNavbar.phtml' ?>
+
+<!-- Stories pulled from our database -->
+<?php foreach ($stories as $story): ?>
+<div class="container">
+    <div class="card mb-3">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title"><?= $story->getName() ?></h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <!--if the user is logged in he can edit or delete themes-->
+            <?php if (isset($currentUser)): ?>
+                <a href="/" class="btn btn-danger float-left">Delete</a>
+                <a href="/" class="btn btn-warning float-right">Edit</a>
+            <?php endif ?>
+        </div>
+    </div>
+</div>
+
+<?php endforeach; ?>
+<div class="container">
+    <div class="form-group shadow-textarea">
+        <label for="exampleFormControlTextarea6">Create a new story!</label>
+        <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Write something here..."></textarea>
+        <button class="float-right">Post</button>
+    </div>
+</div>
+<?php include 'template/footer.phtml' ?>
+

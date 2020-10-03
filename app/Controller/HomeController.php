@@ -19,7 +19,7 @@ class HomeController extends AbstractController
     public function indexAction(): string
     {
         return $this->view->render('home', [
-            'themes' => Theme::getAll(),
+            'themes' => Theme::getAll()
         ]);
     }
 }

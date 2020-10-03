@@ -1,10 +1,15 @@
 <?php include 'template/headerNavbar.phtml' ?>
 
 <div class="container">
+    <h3 class="text-center">Login</h3>
     <form method="post" action="/user/loginSubmit">
         <div class="form-group">
+            <label for="user_name">Username</label>
+            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Example Joe">
+        </div>
+        <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email">
+            <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
@@ -13,4 +18,5 @@
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
 </div>
+
 <?php include 'template/footer.phtml' ?>

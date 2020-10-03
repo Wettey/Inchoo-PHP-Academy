@@ -9,6 +9,7 @@ use App\Core\DataObject;
 
 abstract class AbstractModel extends DataObject
 {
+    // override this in a child class
     protected static $tableName;
 
     protected static function getTableName(): string
@@ -38,10 +39,18 @@ abstract class AbstractModel extends DataObject
         return static::createObject($firstRow);
     }
 
-    public static function getMultiple(string $column, $value): array
+    public static function getMultiple(string $column, $value, string $orderBy = null, array $limit = []): array
     {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE {$column} = :value";
+
+        if ($orderBy) {
+            $sql .= " ORDER BY {$orderBy}";
+        }
+
+        if ($limit) {
+            $sql .= " LIMIT {$limit[0]}, {$limit[1]}";
+        }
 
         $statement = Database::getInstance()->prepare($sql);
         $statement->bindValue('value', $value);
@@ -55,10 +64,18 @@ abstract class AbstractModel extends DataObject
         return $models;
     }
 
-    public static function getAll(): array
+    public static function getAll(string $orderBy = null, array $limit = []): array
     {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName}";
+
+        if ($orderBy) {
+            $sql .= " ORDER BY {$orderBy}";
+        }
+
+        if ($limit) {
+            $sql .= " LIMIT {$limit[0]}, {$limit[1]}";
+        }
 
         $statement = Database::getInstance()->prepare($sql);
         $statement->execute();
@@ -87,8 +104,36 @@ abstract class AbstractModel extends DataObject
 
         $sql = "INSERT INTO {$tableName} ($columnsString) VALUES ($valuesString)";
 
-        $statement = Database::getInstance()->prepare($sql);
+        $db = Database::getInstance();
+
+        $statement = $db->prepare($sql);
         $statement->execute($data);
+
+        return $db->lastInsertId(static::getTableName());
+    }
+
+    public static function update($data)
+    {
+        $tableName = static::getTableName();
+
+        $columns = [];
+        $values = [];
+        foreach (array_keys($data) as $column) {
+            $columns[] = $column;
+            $values[] = ":{$column}";
+        }
+
+        $columnsString = implode(', ', $columns);
+        $valuesString = implode(', ', $values);
+
+        $sql = "UPDATE {$tableName} ($columnsString) SET ($valuesString) WHERE {$column} = :value";
+
+        $db = Database::getInstance();
+
+        $statement = $db->prepare($sql);
+        $statement->execute($data);
+
+        return $db->lastInsertId(static::getTableName());
     }
 
     public static function delete(string $column, $value)

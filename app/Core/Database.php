@@ -10,7 +10,7 @@ class Database extends \PDO
     {
         $dbConfig = Config::get('db');
 
-        $dsn = 'mysql:host=' . $dbConfig['dbhost'] . ';dbname=' . $dbConfig['dbname'] . ';charset=utf8';
+        $dsn = 'mysql:host=' . $dbConfig['host'] . ';dbname=' . $dbConfig['name'] . ';charset=utf8';
         parent::__construct($dsn, $dbConfig['user'], $dbConfig['password']);
 
         $this->setAttribute(

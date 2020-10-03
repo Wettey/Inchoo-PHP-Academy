@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Core;
 
 class DataObject
@@ -33,26 +35,36 @@ class DataObject
         return $this;
     }
 
-    public function getData(): array
+    public function getData(string $key = null): array
     {
+        if ($key !== null) {
+            return $this->__get($key);
+        }
         return $this->data;
     }
 
-    public function setData(array $data)
+
+    public function setData($key, $value = null)
     {
-        $this->data = $data;
+        if ($key === (array)$key) {
+            $this->data = $key;
+        } else {
+            $this->data[$key] = $value;
+        }
+
         return $this;
     }
 
     public function __call($name, $arguments)
     {
-        $key = strtolower(substr($name, 3));
+        $key = $this->underscore(substr($name, 3));
 
         switch (substr($name, 0, 3)) {
             case 'get':
                 return $this->__get($key);
             case 'set':
-                return $this->__set($key, $arguments[0]);
+                $value = $arguments[0] ?? null;
+                return $this->__set($key, $value);
             case 'uns':
                 return $this->__unset($key);
             case 'has':
@@ -60,5 +72,13 @@ class DataObject
         }
 
         return $this;
+    }
+
+
+    protected function underscore(string $name): string
+    {
+        return strtolower(
+            trim(preg_replace('/([A-Z]|[0-9]+)/', "_$1", $name), '_')
+        );
     }
 }

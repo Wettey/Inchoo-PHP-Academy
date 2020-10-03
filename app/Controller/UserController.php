@@ -8,15 +8,23 @@ class UserController extends AbstractController
 {
     public function loginAction()
     {
-        return $this->view->render('login');
+        if (!$this->authorization->isLoggedIn()) {
+            return $this->view->render('login');
+        }
+
+        header('Location: /');
     }
 
     public function registerAction()
     {
-        return $this->view->render('register');
+        if (!$this->authorization->isLoggedIn()) {
+            return $this->view->render('register');
+        }
+
+        header('Location: /');
     }
 
-    public function registerSubmitAction(): void
+    public function registerSubmitAction()
     {
         if (!$this->isPost()) {
             // only POST requests are allowed
@@ -24,7 +32,8 @@ class UserController extends AbstractController
             return;
         }
 
-        if (!isset($_POST['email'], $_POST['password'], $_POST['confirm_password'])) {
+        $requiredKeys = ['user_name', 'email', 'password', 'confirm_password'];
+        if (!$this->validateData($_POST, $requiredKeys)) {
             // set error message
             header('Location: /user/register');
             return;
@@ -32,6 +41,14 @@ class UserController extends AbstractController
 
         if ($_POST['password'] !== $_POST['confirm_password']) {
             // set error message
+            header('Location: /user/register');
+            return;
+        }
+
+        $user = User::getOne('user_name', $_POST['user_name']);
+
+        if ($user->getId()) {
+            // user already exists
             header('Location: /user/register');
             return;
         }
@@ -45,24 +62,24 @@ class UserController extends AbstractController
         }
 
         User::insert([
-            'firstname' => $_POST['first_name'] ?? null,
-            'lastname' => $_POST['last_name'] ?? null,
+            'user_name' => $_POST['user_name'] ?? null,
             'email' => $_POST['email'],
-            'pass' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
         ]);
 
-        header('Location: /');
+        header('Location: /user/login');
     }
 
-    public function loginSubmitAction(): void
+    public function loginSubmitAction()
     {
         // only POST requests are allowed
-        if (!$this->isPost()) {
+        if (!$this->isPost() || $this->authorization->isLoggedIn()) {
             header('Location: /');
             return;
         }
 
-        if (!isset($_POST['email'], $_POST['password'])) {
+        $requiredKeys = ['email', 'password'];
+        if (!$this->validateData($_POST, $requiredKeys)) {
             // set error message
             header('Location: /user/login');
             return;
@@ -76,7 +93,27 @@ class UserController extends AbstractController
             return;
         }
 
-        // todo session and logout
+        $this->authorization->login($user);
+        header('Location: /');
+    }
+
+    protected function validateData(array $data, array $keys): bool
+    {
+        foreach ($keys as $key) {
+            $isValueValid = isset($data[$key]) && $data[$key];
+            if (!$isValueValid) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function logoutAction()
+    {
+        if ($this->authorization->isLoggedIn()) {
+            $this->authorization->logout();
+        }
+
         header('Location: /');
     }
 }

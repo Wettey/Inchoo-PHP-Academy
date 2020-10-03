@@ -14,7 +14,7 @@ class View
 
         ob_start();
         try {
-            extract($args, EXTR_SKIP);
+            extract($this->modifyArgs($args), EXTR_SKIP);
             include $templateFileName;
         } catch (\Exception $e) {
             ob_end_clean();
@@ -27,5 +27,12 @@ class View
     protected function getTemplateFileName(string $template): string
     {
         return self::VIEW_PATH . DIRECTORY_SEPARATOR . $template . '.phtml';
+    }
+
+    protected function modifyArgs(array $args): array
+    {
+        // adds $currentUser variable to all views
+        $args['currentUser'] = Authorization::getInstance()->getCurrentUser();
+        return $args;
     }
 }
