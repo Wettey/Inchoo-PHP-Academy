@@ -8,7 +8,7 @@ class Story extends AbstractModel
 {
     protected static $tableName = 'story';
 
-    // add user data to post
+    // add the creators user data
     protected static function createObject(array $data): AbstractModel
     {
         if ($userId = $data['user_id'] ?? null) {

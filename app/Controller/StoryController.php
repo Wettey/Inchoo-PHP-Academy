@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Model\Story;
+use App\Model\User;
 
 class StoryController extends AbstractController
 {

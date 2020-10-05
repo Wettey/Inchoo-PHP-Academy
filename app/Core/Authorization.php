@@ -54,4 +54,9 @@ class Authorization
     {
         return $this->currentUser;
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->currentUser->getAdmin();
+    }
 }

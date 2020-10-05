@@ -1,0 +1,28 @@
+<?php include 'template/headerNavbar.phtml' ?>
+
+<h2 class="container text-center">Create a new Theme!</h2>
+<br>
+<form class="container" action="create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="new_theme_name">Theme Name</label>
+        <input type="text"  class="form-control" id="new_theme_name" name="new_theme_name" placeholder="example: Witcher">
+    </div>
+    <div class="form-group">
+        <label for="new_theme_category">Theme Category</label>
+        <input type="text" class="form-control" id="new_theme_category" name="new_theme_category" placeholder="example: Video Game">
+    </div>
+    <div class="form-group">
+        <label for="new_theme_description">Theme Description</label>
+        <textarea type="text" class="form-control" id="new_theme_description" name="new_theme_description" rows="5"></textarea>
+    </div>
+
+    <!-- image -->
+    <div class="form-group">
+        <label for="file" class="float-right">Image must be less than 100kb!</label>
+        <input type="file" class="float-right" id="file" name="file">
+    </div>
+    <br><br><br>
+    <button type="submit" name="submit" class="form-group btn btn-success float-right" >Upload!</button>
+</form>
+
+<?php include 'template/footer.phtml' ?>

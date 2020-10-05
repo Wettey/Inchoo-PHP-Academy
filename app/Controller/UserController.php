@@ -56,7 +56,7 @@ class UserController extends AbstractController
         $user = User::getOne('email', $_POST['email']);
 
         if ($user->getId()) {
-            // user already exists
+            // email already exists
             header('Location: /user/register');
             return;
         }
@@ -72,15 +72,16 @@ class UserController extends AbstractController
 
     public function loginSubmitAction()
     {
-        // only POST requests are allowed
+
         if (!$this->isPost() || $this->authorization->isLoggedIn()) {
+            // only POST requests are allowed
             header('Location: /');
             return;
         }
 
         $requiredKeys = ['email', 'password'];
         if (!$this->validateData($_POST, $requiredKeys)) {
-            // set error message
+            // you didn't enter your email or password correctly
             header('Location: /user/login');
             return;
         }
@@ -88,7 +89,7 @@ class UserController extends AbstractController
         $user = User::getOne('email', $_POST['email']);
 
         if (!$user->getId() || !password_verify($_POST['password'], $user->getPassword())) {
-            // set error message
+            // wrong username or password
             header('Location: /user/login');
             return;
         }
@@ -108,10 +109,21 @@ class UserController extends AbstractController
         return true;
     }
 
+    // self explanatory
     public function logoutAction()
     {
         if ($this->authorization->isLoggedIn()) {
             $this->authorization->logout();
+        }
+
+        header('Location: /');
+    }
+
+    // delete user account
+    public function deleteAction()
+    {
+        if ($this->authorization->isLoggedIn()) {
+            $this->authorization->delete();
         }
 
         header('Location: /');

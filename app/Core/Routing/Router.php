@@ -15,7 +15,7 @@ class Router implements RouterInterface
             throw new RouterException('Not valid URL');
         }
 
-        $controller = ucfirst(strtolower($parts[0] ?? 'home')) . 'Controller';
+        $controller = ucfirst(strtolower($parts[0] ?? 'theme')) . 'Controller';
         $method = strtolower($parts[1] ?? 'index') . 'Action';
 
         $className = "\\App\\Controller\\{$controller}";
