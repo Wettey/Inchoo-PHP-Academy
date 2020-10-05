@@ -1,0 +1,23 @@
+body {
+    background-color: #1d2124;
+    color: white;
+}
+
+.footer {
+    clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: -200px;
+}
+
+#sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.navbar-text {
+    position: center;
+    text-align: center;
+    padding-top: 1px;
+}
+

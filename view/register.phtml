@@ -1,0 +1,26 @@
+<?php include 'template/headerNavbar.phtml' ?>
+
+<div class="container justify-content-center">
+    <h3 class="text-center">Register</h3>
+    <form method="post" action="/user/registerSubmit">
+        <div class="form-group">
+            <label for="user_name">Username</label>
+            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Example Joe">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="example.joe@gmail.com">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="examp@101">
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="examp@101">
+        </div>
+        <button type="submit" class="btn btn-success float-right">Register</button>
+    </form>
+</div>
+
+<?php include 'template/footer.phtml' ?>
