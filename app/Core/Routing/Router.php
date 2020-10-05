@@ -18,7 +18,7 @@ class Router implements RouterInterface
         $controller = ucfirst(strtolower($parts[0] ?? 'theme')) . 'Controller';
         $method = strtolower($parts[1] ?? 'index') . 'Action';
 
-        $className = "\\App\\Controller\\{$controller}";
+        $className = "\\Home\\Polaznik4\\Public_html\\App\\Controller\\{$controller}";
 
         if (!method_exists($className, $method)) {
             throw new RouterException('Method does not exist');
