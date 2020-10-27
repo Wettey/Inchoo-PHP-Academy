@@ -11,16 +11,24 @@ class Story extends AbstractModel
     // add the creators user data
     protected static function createObject(array $data): AbstractModel
     {
+        $data['stories'] = [];
+        if ($storyId = $data['id'] ?? null) {
+            $stories = Story::getMultiple('', $storyId);
+            $data['stories'] = $stories;
+        }
+
         if ($userId = $data['user_id'] ?? null) {
-            $user = User::getOne('id', $userId);
+            $user = User::getOne('user_id', $userId);
             $data['user_name'] = "{$user->getUserName}";
         }
 
-        $data['stories'] = [];
-        if ($storyId = $data['id'] ?? null) {
-            $stories = Story::getMultiple('story_id', $storyId);
-            $data['stories'] = $stories;
+        $data['themes'] = [];
+        if ($themeId = $data['id'] ?? null) {
+            $themes = Theme::getMultiple('theme_id', $themeId);
+            $data['themes'] = $themes;
         }
+
+
 
         return parent::createObject($data);
     }

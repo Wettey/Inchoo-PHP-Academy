@@ -6,6 +6,7 @@ use App\Model\User;
 
 class UserController extends AbstractController
 {
+    // login view
     public function loginAction()
     {
         if (!$this->authorization->isLoggedIn()) {
@@ -15,6 +16,7 @@ class UserController extends AbstractController
         header('Location: /');
     }
 
+    // register view
     public function registerAction()
     {
         if (!$this->authorization->isLoggedIn()) {
@@ -24,6 +26,7 @@ class UserController extends AbstractController
         header('Location: /');
     }
 
+    //register validation
     public function registerSubmitAction()
     {
         if (!$this->isPost()) {
@@ -70,6 +73,7 @@ class UserController extends AbstractController
         header('Location: /user/login');
     }
 
+    // login validation
     public function loginSubmitAction()
     {
 
@@ -109,7 +113,7 @@ class UserController extends AbstractController
         return true;
     }
 
-    // self explanatory
+    // user logout
     public function logoutAction()
     {
         if ($this->authorization->isLoggedIn()) {

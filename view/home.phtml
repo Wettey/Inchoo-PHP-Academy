@@ -1,12 +1,10 @@
-<?php include 'template/headerNavbar.phtml' ?>
+<?php include 'templates/headerNavbar.phtml' ?>
 
 <!-- Create new themes or browse existing ones with a little help from jquery -->
 <?php if (isset($currentUser)):  ?>
     <div class="d-flex justify-content-center">
         <a href="/theme/new">
-            <button class="btn btn-success">
-                + New Theme
-            </button>
+            <button class="btn btn-success">+ New Theme</button>
         </a>
     </div>
 <?php endif ?>
@@ -25,7 +23,7 @@
     <div class="row justify-content-center">
         <?php foreach ($themes as $theme) : ?>
             <div class="col-sm-6">
-                <a href="/story/index">
+                <a href="/story/read">
                 <div class="card-img">
                     <div class="card-body  bg-transparent" style = "width: 22rem; " >
                         <h5 class="card-title text-center text-white"><b><?= $theme->getName() ?></b></h5>
@@ -48,5 +46,5 @@
     </div>
 </div>
 
-<?php include 'template/footer.phtml' ?>
+<?php include 'templates/footer.phtml' ?>
 

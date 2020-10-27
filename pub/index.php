@@ -1,5 +1,6 @@
 <?php
 
+use App\Core\Exception\RouterException;
 use App\Core\Routing\Router;
 use App\Core\Application;
 
@@ -21,7 +22,7 @@ $application = new Application($router);
 
 try {
     $response = $application->run();
-} catch (\App\Core\Exception\RouterException $e) {
+} catch (RouterException $e) {
     http_response_code(404);
     $response = '<h1>404 Not Found</h1>';
 } catch (\Exception $e) {

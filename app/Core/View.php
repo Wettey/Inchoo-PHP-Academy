@@ -24,6 +24,7 @@ class View
         return ob_get_clean() ?: '';
     }
 
+
     protected function getTemplateFileName(string $template): string
     {
         return self::VIEW_PATH . DIRECTORY_SEPARATOR . $template . '.phtml';
