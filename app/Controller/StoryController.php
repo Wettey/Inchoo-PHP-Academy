@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Model\Story;
-use App\Model\User;
 
 class StoryController extends AbstractController
 {
@@ -17,7 +16,8 @@ class StoryController extends AbstractController
         parent::__construct();
     }
 
-    public function indexAction(): string
+    // render stories view
+    public function readAction(): string
     {
         return $this->view->render('story', [
             'stories' => Story::getAll()

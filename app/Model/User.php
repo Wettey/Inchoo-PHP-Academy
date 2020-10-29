@@ -10,9 +10,4 @@ class User extends AbstractModel
     {
         return $this->__get('password');
     }
-
-    public function getAdmin()
-    {
-        return $this->__get('admin');
-    }
 }

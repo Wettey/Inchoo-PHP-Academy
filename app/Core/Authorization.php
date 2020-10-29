@@ -57,6 +57,6 @@ class Authorization
 
     public function isAdmin(): bool
     {
-        return $this->currentUser->getAdmin();
+        return isset($this->currentUser['admin']);
     }
 }

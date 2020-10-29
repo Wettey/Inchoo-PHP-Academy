@@ -1,7 +1,6 @@
-<?php include 'template/headerNavbar.phtml' ?>
+<?php include BP . DIRECTORY_SEPARATOR . 'view/templates/headerNavbar.phtml' ?>
 
-
-<h2 class="container text-center">Update <? $theme->getId() ?></h2>
+<h2 class="container text-center">Create a new Theme!</h2>
 <br>
 <form class="container" action="create" method="post" enctype="multipart/form-data">
     <div class="form-group">
@@ -26,4 +25,4 @@
     <button type="submit" name="submit" class="form-group btn btn-success float-right" >Upload!</button>
 </form>
 
-<?php include 'template/footer.phtml' ?>
+<?php include BP . DIRECTORY_SEPARATOR . 'view/templates/footer.phtml' ?>
