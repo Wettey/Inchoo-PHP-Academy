@@ -9,38 +9,37 @@
     </div>
 <?php endif ?>
 
-<br>
 <div class="d-flex justify-content-center">
     <form class="form-inline my-lg-2">
-        <input class="form-control mr-sm-2" type="search" placeholder="browse themes..." aria-label="Search">
+        <input class="form-control mr-sm-2" type="search" placeholder="type theme name..." aria-label="Search">
     </form>
+    <button class="btn bg-primary dropdown-menu">Filter</button>
 </div>
-
-<br><br>
-
+<br>
 <!-- Themes pulled from our database -->
-<div class="container">
+<div class="card-body">
     <div class="row justify-content-center">
         <?php foreach ($themes as $theme) : ?>
-            <div class="col-sm-6">
+            <div class="align-content-lg-center">
                 <a href="/story/read">
                 <div class="card-img">
                     <div class="card-body  bg-transparent" style = "width: 22rem; " >
-                        <h5 class="card-title text-center text-white"><b><?= $theme->getName() ?></b></h5>
+                    <h5 class="card-title text-center text-white"><b><?= $theme->getName() ?></b></h5>
                         <img class="card-img-top rounded"  src="<?= $theme->getImage_path() ?>" alt="missing image">
-                        <p class="card-text text-center text-white"><b><?= $theme->getCategory() ?></b></p>
-                        <p class="card-text text-center text-secondary"><i><?= $theme->getDescription() ?></i></p>
-                        <!--
-                        if the user is logged in he can edit or delete themes
-                        otherwise, he can only see (read) the content
-                        -->
-                        <?php if ($currentUser && $currentUser->getId() == $theme->getUserId()): ?>
-                            <a href="theme/delete?id=<?= $theme->getId() ?>" class="btn btn-danger float-left">Delete</a>
-                            <a href="theme/edit?id=<?= $theme->getId() ?>" class="btn btn-warning float-right">Edit</a>
-                        <?php endif; ?>
+                            <p class="card-text text-center text-white"><b><?= $theme->getCategory() ?></b></p>
+                            <p class="card-text text-center small text-white font-italic"><?= $theme->getDescription() ?></p>
+                </a>
+                            <!--
+                            if the user is logged in he can edit or delete themes
+                            otherwise, he can only see (read) the content
+                            -->
+                            <?php if ($currentUser && $currentUser->getId() == $theme->getUserId()): ?>
+                                <a href="theme/delete?id=<?= $theme->getId() ?>" class="btn btn-outline-danger col-3 mx-3">Delete</a>
+                                <a href="theme/edit?id=<?= $theme->getId() ?>" class="btn btn-warning col-7 ">Edit</a>
+                            <?php endif; ?>
+                        <br><br>
                     </div>
                 </div>
-                </a>
             </div>
         <?php endforeach; ?>
     </div>

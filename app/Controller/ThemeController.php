@@ -20,7 +20,7 @@ class ThemeController extends AbstractController
     public function readAction(): string
     {
         return $this->view->render('home', [
-            'themes' => Theme::getAll('name DESC')
+            'themes' => Theme::getAll('name ASC')
         ]);
     }
 

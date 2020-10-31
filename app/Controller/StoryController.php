@@ -19,7 +19,7 @@ class StoryController extends AbstractController
     // render stories view
     public function readAction(): string
     {
-        return $this->view->render('story', [
+        return $this->view->render('stories/story', [
             'stories' => Story::getAll()
         ]);
     }

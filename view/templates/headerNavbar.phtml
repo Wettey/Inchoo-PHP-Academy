@@ -13,7 +13,7 @@
 
 <body>
     <!-- Navigation bar -->
-    <nav class="navbar navbar-expand navbar-dark bg-danger">
+    <nav class="navbar navbar-expand navbar-dark bg-danger fixed-top">
         <div class="nav-item">
             <a class="float-left" href="/">
                 <img src="/img/nerd.png" width="70" height="70" class="d-inline-block align-top" alt="">
@@ -48,8 +48,9 @@
             <?php endif; ?>
         </div>
     </nav>
-
+    <br><br><br><br>
     <?php if (isset($currentUser)): ?>
-    <p class="text-right">Logged in as:<br><b><?= $currentUser->getUserName() ?></b></p>
+    <p class="text-center sub-text font-weight-bold font-italic">Welcome! <br><b class="text-warning"><?= $currentUser->getUserName() ?></b></p>
     <?php endif ?>
+
 
