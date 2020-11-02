@@ -17,28 +17,26 @@
 </div>
 <br>
 <!-- Themes pulled from our database -->
-<div class="card-body">
+<div class="container card-body col-sm-12">
     <div class="row justify-content-center">
         <?php foreach ($themes as $theme) : ?>
+        <a href="/story/read">
             <div class="align-content-lg-center">
-                <a href="/story/read">
-                <div class="card-img">
-                    <div class="card-body  bg-transparent" style = "width: 22rem; " >
-                    <h5 class="card-title text-center text-white"><b><?= $theme->getName() ?></b></h5>
+                <div class="card-body bg-transparent" style = "width: 22rem; " >
+                        <h5 class="card-title text-center text-white"><b><?= $theme->getName() ?></b></h5>
                         <img class="card-img-top rounded"  src="<?= $theme->getImage_path() ?>" alt="missing image">
-                            <p class="card-text text-center text-white"><b><?= $theme->getCategory() ?></b></p>
-                            <p class="card-text text-center small text-white font-italic"><?= $theme->getDescription() ?></p>
-                </a>
-                            <!--
-                            if the user is logged in he can edit or delete themes
-                            otherwise, he can only see (read) the content
-                            -->
-                            <?php if ($currentUser && $currentUser->getId() == $theme->getUserId()): ?>
-                                <a href="theme/delete?id=<?= $theme->getId() ?>" class="btn btn-outline-danger col-3 mx-3">Delete</a>
-                                <a href="theme/edit?id=<?= $theme->getId() ?>" class="btn btn-warning col-7 ">Edit</a>
-                            <?php endif; ?>
-                        <br><br>
-                    </div>
+                        <p class="card-text text-center text-white"><b><?= $theme->getCategory() ?></b></p>
+                        <p class="card-text text-center small text-white font-italic"><?= $theme->getDescription() ?></p>
+        </a>
+                        <!--
+                        if the user is logged in he can edit or delete themes
+                        otherwise, he can only see (read) the content
+                        -->
+                        <?php if ($currentUser && $currentUser->getId() == $theme->getUserId()): ?>
+                            <a href="theme/delete?id=<?= $theme->getId() ?>" class="btn btn-outline-danger col-3 mx-3">Delete</a>
+                            <a href="theme/edit?id=<?= $theme->getId() ?>" class="btn bg-warning col-7 ">Edit</a>
+                        <?php endif; ?>
+                    <br><br>
                 </div>
             </div>
         <?php endforeach; ?>
